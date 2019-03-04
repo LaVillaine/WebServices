@@ -3,3 +3,9 @@
 ################################################################################
 
 /.vs/~$GitHubVSTemp$~/v14/.suo
+/LibraryService.REST/.vs
+/LibraryService.REST/LibraryService.REST/bin
+/LibraryService.REST/LibraryService.REST/obj/Debug
+/LibraryService.REST/LibraryService.REST.Tests/bin/Debug
+/LibraryService.REST/LibraryService.REST.Tests/obj/Debug
+/LibraryService.REST/packages
