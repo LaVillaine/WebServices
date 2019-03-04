@@ -27,4 +27,16 @@ namespace StaticLibraryService.REST
 
         // Add more operations here and mark them with [OperationContract]
     }
+
+    class Book
+    {
+        Book(string title)
+        {
+            Title = title;
+        }
+
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public string Publisher { get; set; }
+    }
 }
