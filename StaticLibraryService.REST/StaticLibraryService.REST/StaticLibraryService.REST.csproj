@@ -98,6 +98,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BookView.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -118,6 +119,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BookView.aspx.cs">
+      <DependentUpon>BookView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BookView.aspx.designer.cs">
+      <DependentUpon>BookView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BookService.svc.cs">
       <DependentUpon>BookService.svc</DependentUpon>
