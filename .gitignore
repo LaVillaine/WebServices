@@ -9,3 +9,7 @@
 /LibraryService.REST/LibraryService.REST.Tests/bin/Debug
 /LibraryService.REST/LibraryService.REST.Tests/obj/Debug
 /LibraryService.REST/packages
+/StaticLibraryService.REST/.vs
+/StaticLibraryService.REST/packages
+/StaticLibraryService.REST/StaticLibraryService.REST/bin
+/StaticLibraryService.REST/StaticLibraryService.REST/obj/Debug
