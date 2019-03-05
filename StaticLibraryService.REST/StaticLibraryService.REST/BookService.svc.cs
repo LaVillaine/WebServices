@@ -17,6 +17,7 @@ namespace StaticLibraryService.REST
         private static List<Book> mCatalogue = new List<Book>() { new Book("Jane Eyre"), new Book("Robinson Crusoe"), new Book("Macbeth")};
 
         [WebGet(UriTemplate="/Catalogue")]
+        [OperationContract]
         public string GetCatalogue()
         {
             string catalogue = "";
@@ -24,15 +25,49 @@ namespace StaticLibraryService.REST
                 catalogue = JsonConvert.SerializeObject(mCatalogue, Formatting.Indented);
             return catalogue;
         }
-        // To use HTTP GET, add [WebGet] attribute. (Default ResponseFormat is WebMessageFormat.Json)
+
+        [WebGet(UriTemplate = "/Catalogue/{catalogueIndex}")]
         [OperationContract]
-        public void DoWork()
+        public string GetBook(string catalogueIndex)
         {
-            // Add your operation implementation here
-            return;
+            string catalogue = "";
+            uint index;
+            uint.TryParse(catalogueIndex, out index);
+            if (mCatalogue.Count > 0 && index < mCatalogue.Count)
+                catalogue = JsonConvert.SerializeObject(mCatalogue[(int)index], Formatting.Indented);
+            return catalogue;
         }
 
-        // Add more operations here and mark them with [OperationContract]
+        [WebInvoke(Method = "DELETE", UriTemplate = "/Catalogue/{catalogueIndex}")]
+        [OperationContract]
+        public void DeleteBook(string catalogueIndex)
+        {
+            uint index;
+            uint.TryParse(catalogueIndex, out index);
+            if (mCatalogue.Count > 0 && index < mCatalogue.Count)
+                mCatalogue.RemoveAt((int)index);
+        }
+
+        [WebInvoke(Method = "POST", UriTemplate = "/Catalogue", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        public void AddBook(string bookAsString)
+        {
+            //Book addedBook = JsonConvert.DeserializeObject<Book>(bookAsString);
+            //if (addedBook.Title != null && addedBook.Title != "")
+            //    mCatalogue.Add(addedBook);
+        }
+
+        [WebInvoke(Method = "PUT", UriTemplate = "/Catalogue/{catalogueIndex}", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        public void UpdateBook(string bookAsString, string catalogueIndex)
+        {
+            uint index;
+            uint.TryParse(catalogueIndex, out index);
+            Book updatedBook = JsonConvert.DeserializeObject<Book>(bookAsString);
+            bool validUpdate = (mCatalogue.Count > 0 && index < mCatalogue.Count && updatedBook.Title != null && updatedBook.Title != "");
+            if (validUpdate)
+                mCatalogue[(int)index] = updatedBook;
+        }
     }
 
     class Book
