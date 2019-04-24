@@ -16,7 +16,7 @@ namespace StaticLibraryService.REST
     {
         private static List<Book> mCatalogue = new List<Book>() { new Book("Jane Eyre"), new Book("Robinson Crusoe"), new Book("Macbeth")};
 
-        [WebGet(UriTemplate="/Catalogue")]
+        [WebGet(UriTemplate="/Catalogue", ResponseFormat =WebMessageFormat.Xml)]
         [OperationContract]
         public string GetCatalogue()
         {
@@ -26,7 +26,7 @@ namespace StaticLibraryService.REST
             return catalogue;
         }
 
-        [WebGet(UriTemplate = "/Catalogue/{catalogueIndex}")]
+        [WebGet(UriTemplate = "/Catalogue/{catalogueIndex}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         public string GetBook(string catalogueIndex)
         {
@@ -52,9 +52,9 @@ namespace StaticLibraryService.REST
         [OperationContract]
         public void AddBook(string bookAsString)
         {
-            //Book addedBook = JsonConvert.DeserializeObject<Book>(bookAsString);
-            //if (addedBook.Title != null && addedBook.Title != "")
-            //    mCatalogue.Add(addedBook);
+            Book addedBook = JsonConvert.DeserializeObject<Book>(bookAsString);
+            if (addedBook.Title != null && addedBook.Title != "")
+                mCatalogue.Add(addedBook);
         }
 
         [WebInvoke(Method = "PUT", UriTemplate = "/Catalogue/{catalogueIndex}", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
