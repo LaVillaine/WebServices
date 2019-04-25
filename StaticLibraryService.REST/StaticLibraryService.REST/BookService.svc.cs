@@ -46,9 +46,8 @@ namespace StaticLibraryService.REST
 
         [WebInvoke(Method = "POST", UriTemplate = "/Catalogue", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         [OperationContract]
-        public void AddBook(string bookAsString)
+        public void AddBook(Book addedBook)
         {
-            Book addedBook = JsonConvert.DeserializeObject<Book>(bookAsString);
             if (addedBook.Title != null && addedBook.Title != "")
                 mCatalogue.Add(addedBook);
         }

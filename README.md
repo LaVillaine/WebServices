@@ -16,7 +16,7 @@ Host: localhost:55105
 Content-Type: application/json
 Content-Length: 1024
 
-"{'Title': 'Robinson Crusoe','Author': 'Daniel Defoe','Publisher': null}"
+{"Title":"Robinson Crusoe","Author": "Daniel Defoe","Publisher": null}
 
 
 _Raw POST Format_
@@ -26,7 +26,7 @@ Host: localhost:55105
 Content-Type: application/json
 Content-Length: 1024
 
-"{'Title': 'Great Expectations','Author': null,'Publisher': null}"
+{"Title": "Great Expectations","Author": null,"Publisher": null}
 
 _Raw GET Format_
 GET /BookService.svc/Catalogue HTTP/1.1
