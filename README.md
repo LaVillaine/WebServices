@@ -10,14 +10,13 @@ _Reference Links_
 - https://www.c-sharpcorner.com/UploadFile/736ca4/display-wcf-data-service-into-html-page/
 
 _Raw PUT Format_
-
-PUT /BookService.svc/Catalogue/1 HTTP/1.1
-User-Agent: Fiddler
-Host: localhost:55105
-Content-Type: application/json
-Content-Length: 1024
-
-{"Title":"Robinson Crusoe","Author": "Daniel Defoe","Publisher": null}
+- PUT /BookService.svc/Catalogue/1 HTTP/1.1
+- User-Agent: Fiddler
+- Host: localhost:55105
+- Content-Type: application/json
+- Content-Length: 1024
+- 
+- {"Title":"Robinson Crusoe","Author": "Daniel Defoe","Publisher": null}
 
 
 _Raw POST Format_
