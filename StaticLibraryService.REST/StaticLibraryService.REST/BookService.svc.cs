@@ -10,21 +10,16 @@ using Newtonsoft.Json;
 
 namespace StaticLibraryService.REST
 {
-    [ServiceContract(Namespace = "")]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class BookService
+    public class BookService : IBookService
     {
         private static List<Book> mCatalogue = new List<Book>() { new Book { Title = "Jane Eyre" }, new Book { Title = "Robinson Crusoe" }, new Book { Title = "Macbeth" } };
 
-        [WebGet(UriTemplate="Catalogue", ResponseFormat = WebMessageFormat.Json)]
-        [OperationContract]
         public Book[] GetCatalogue()
         {
             return mCatalogue.ToArray();
         }
 
-        [WebGet(UriTemplate = "/Catalogue/{catalogueIndex}", ResponseFormat = WebMessageFormat.Json)]
-        [OperationContract]
         public Book GetBook(string catalogueIndex)
         {
             uint index;
@@ -34,8 +29,6 @@ namespace StaticLibraryService.REST
             return new Book { };
         }
 
-        [WebInvoke(Method = "DELETE", UriTemplate = "/Catalogue/{catalogueIndex}")]
-        [OperationContract]
         public void DeleteBook(string catalogueIndex)
         {
             uint index;
@@ -44,16 +37,12 @@ namespace StaticLibraryService.REST
                 mCatalogue.RemoveAt((int)index);
         }
 
-        [WebInvoke(Method = "POST", UriTemplate = "/Catalogue", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        [OperationContract]
         public void AddBook(Book addedBook)
         {
             if (addedBook.Title != null && addedBook.Title != "")
                 mCatalogue.Add(addedBook);
         }
 
-        [WebInvoke(Method = "PUT", UriTemplate = "/Catalogue/{catalogueIndex}", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        [OperationContract]
         public void UpdateBook(Book updatedBook, string catalogueIndex)
         {
             uint index;
@@ -62,6 +51,30 @@ namespace StaticLibraryService.REST
             if (validUpdate)
                 mCatalogue[(int)index] = updatedBook;
         }
+    }
+
+    [ServiceContract(Namespace = "StaticLibraryService.REST")]
+    public interface IBookService
+    {
+        [WebInvoke(Method = "POST", UriTemplate = "/Catalogue", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        void AddBook(Book addedBook);
+
+        [WebInvoke(Method = "GET", UriTemplate = "/Catalogue", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        Book[] GetCatalogue();
+
+        [WebInvoke(Method = "GET", UriTemplate = "/Catalogue/{catalogueIndex}", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        Book GetBook(string catalogueIndex);
+
+        [WebInvoke(Method = "DELETE", UriTemplate = "/Catalogue/{catalogueIndex}")]
+        [OperationContract]
+        void DeleteBook(string catalogueIndex);
+
+        [WebInvoke(Method = "PUT", UriTemplate = "/Catalogue/{catalogueIndex}", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        void UpdateBook(Book updatedBook, string catalogueIndex);
     }
 
     [DataContract]
