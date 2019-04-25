@@ -8,6 +8,7 @@ _Reference Links_
 - https://docs.microsoft.com/en-us/dotnet/framework/wcf/feature-details/create-an-ajax-wcf-asp-net-client
 - https://www.codeproject.com/questions/1032296/get-data-from-wcf-service-in-json-format-and-bind
 - https://www.c-sharpcorner.com/UploadFile/736ca4/display-wcf-data-service-into-html-page/
+- https://stackoverflow.com/questions/4530169/http-post-format-for-wcf-restful-service
 
 #
 
